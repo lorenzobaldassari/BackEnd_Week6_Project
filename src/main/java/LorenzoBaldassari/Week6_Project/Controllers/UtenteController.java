@@ -22,14 +22,14 @@ public class UtenteController {
     private UtenteService utenteService;
 
     @GetMapping
-    public List<Utente> getAutoriList(){
+    public List<Utente> getAutoriList() {
         return utenteService.findAll();
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public RespondUtenteDto postUtente(@RequestBody @Validated RequestUtenteDto body,
-                                       BindingResult bindingResult){
+                                       BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             System.err.println(bindingResult.getAllErrors());
             throw new BadRequestException("errore nel invio del payload per il metodo POST");
@@ -39,13 +39,25 @@ public class UtenteController {
     }
 
     @GetMapping("/{id}")
-    public Utente findById(@PathVariable UUID id){
+    public Utente findById(@PathVariable UUID id) {
         return utenteService.findById(id);
     }
 
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable UUID id) {
+        utenteService.delete(id);
+    }
 
-
-
-
-
+    @PutMapping("{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public RespondUtenteDto modify(@RequestBody @Validated RequestUtenteDto body,
+                                   @PathVariable UUID id, BindingResult bindingResult){
+        if (bindingResult.hasErrors()) {
+            System.err.println(bindingResult.getAllErrors());
+            throw new BadRequestException("errore nel invio del payload per il metodo POST");
+        } else {
+        return utenteService.findByIdAndModify(id,body);
+        }
+    }
 }
