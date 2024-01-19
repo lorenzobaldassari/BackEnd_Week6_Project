@@ -36,7 +36,8 @@ public class UtenteService {
     }
 
     public void delete(UUID id){
-        utenteDao.delete(this.findById(id));
+        Utente utene=utenteDao.findById(id).orElseThrow(()->new ItemNotFoundException(id));
+        utenteDao.delete(utene);
     }
 
     public RespondUtenteDto findByIdAndModify(UUID id, RequestUtenteDto body){

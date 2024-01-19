@@ -32,7 +32,7 @@ public class UtenteController {
                                        BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             System.err.println(bindingResult.getAllErrors());
-            throw new BadRequestException("errore nel invio del payload per il metodo POST");
+            throw new BadRequestException("errore nel invio del payload per il metodo POST"+bindingResult.getAllErrors());
         } else {
             return utenteService.PostUtente(body);
         }
@@ -55,7 +55,7 @@ public class UtenteController {
                                    @PathVariable UUID id, BindingResult bindingResult){
         if (bindingResult.hasErrors()) {
             System.err.println(bindingResult.getAllErrors());
-            throw new BadRequestException("errore nel invio del payload per il metodo POST");
+            throw new BadRequestException("errore nel invio del payload per il metodo POST"+bindingResult.getAllErrors());
         } else {
         return utenteService.findByIdAndModify(id,body);
         }

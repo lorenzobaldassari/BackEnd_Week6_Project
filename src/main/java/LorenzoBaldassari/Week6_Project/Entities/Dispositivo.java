@@ -20,9 +20,9 @@ public class Dispositivo {
     @GeneratedValue
     private UUID id;
 
-    private Tipologiadispositivo tipologiadispositivo;
+    private String tipologiadispositivo;
 
-    private StatoDispositivo statoDispositivo;
+    private String statoDispositivo;
 
     @ManyToOne
     @JoinColumn(name = "id_utente")
