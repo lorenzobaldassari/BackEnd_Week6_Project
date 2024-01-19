@@ -21,6 +21,7 @@ public class Utente {
     private String nome;
     private String cognome;
     private String email;
+    private String urlImmagineDiProfilo;
 
     @JsonIgnore
     @OneToMany(mappedBy = "utente")
