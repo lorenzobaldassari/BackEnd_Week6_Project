@@ -5,6 +5,7 @@ import LorenzoBaldassari.Week6_Project.Entities.Utente;
 import LorenzoBaldassari.Week6_Project.Exceptions.ItemNotFoundException;
 import LorenzoBaldassari.Week6_Project.Payloads.Utente.RequestUtenteDto;
 import LorenzoBaldassari.Week6_Project.Payloads.Utente.RespondUtenteDto;
+import LorenzoBaldassari.Week6_Project.config.MailgunSender;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ public class UtenteService {
     private UtenteDao utenteDao;
     @Autowired
     private Cloudinary cloudinaryUploader;
+
 
     public List<Utente> findAll(){
         return utenteDao.findAll();

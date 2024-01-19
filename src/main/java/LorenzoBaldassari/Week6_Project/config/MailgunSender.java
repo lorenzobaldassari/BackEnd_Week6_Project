@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
-@NoArgsConstructor
 public class MailgunSender {
 
     private String apikey;
@@ -19,16 +18,7 @@ public class MailgunSender {
         this.apikey = apikey;
         this.domaine = domaine;
     }
-    public void sendEmail(String recipient){
-        HttpResponse<JsonNode> response= Unirest.post("https://api.mailgun.net/v3/" + this.domaine + "/messages")
-                .basicAuth("api", this.apikey)
-                .queryString("from","lorenzo baldassari <lorenzobaldassari93@gmail.com>")
-                .queryString("to",recipient)
-                .queryString("subject","registrazione avvenuta")
-                .queryString("text","complimenti ti sei regisrato").asJson();
-        System.out.println("fatto");
 
-    }
     public void sendRegistrationEmail(String recipient) {
     HttpResponse<JsonNode> response = Unirest.post("https://api.mailgun.net/v3/" + this.domaine + "/messages")
             .basicAuth("api", this.apikey)
@@ -38,8 +28,6 @@ public class MailgunSender {
             .queryString("text", "Complimenti per esserti registrato!")
             .asJson();
 }
-//vanno bene entrambi mancava un apice al primo!
-
 
 
     }

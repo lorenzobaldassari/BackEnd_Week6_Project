@@ -21,6 +21,8 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/utenti")
 public class UtenteController {
+    @Autowired
+    MailgunSender mailgunSender;
 
     @Autowired
     private UtenteService utenteService;
@@ -32,9 +34,6 @@ public class UtenteController {
         return utenteService.findAll();
     }
 
-    @Autowired
-    private MailgunSender mailgunSender;
-
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public RespondUtenteDto postUtente(@RequestBody @Validated RequestUtenteDto body,
@@ -43,8 +42,9 @@ public class UtenteController {
             System.err.println(bindingResult.getAllErrors());
             throw new BadRequestException("errore nel invio del payload per il metodo POST"+bindingResult.getAllErrors());
         } else {
-            mailgunSender.sendRegistrationEmail("lorenzobaldassari93@gmail.com");
-//            mailgunSender.sendRegistrationEmail(body.email());
+//            mailgunSender.sendRegistrationEmail("lorenzobaldassari93@gmail.com");
+            mailgunSender.sendRegistrationEmail(body.email());
+
             return utenteService.PostUtente(body);
         }
     }

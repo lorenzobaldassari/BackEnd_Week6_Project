@@ -10,6 +10,7 @@ import LorenzoBaldassari.Week6_Project.Payloads.Dispositivo.RequestDisposivoDto;
 import LorenzoBaldassari.Week6_Project.Payloads.Dispositivo.RespondDispsitivoDto;
 import LorenzoBaldassari.Week6_Project.Payloads.Utente.RequestUtenteDto;
 import LorenzoBaldassari.Week6_Project.Payloads.Utente.RespondUtenteDto;
+import LorenzoBaldassari.Week6_Project.config.MailgunSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +26,7 @@ public class DispositivoService {
     @Autowired
     private UtenteService utenteService;
 
+
     public List<Dispositivo> findAll(){
         return dispositivoDao.findAll();
     }
@@ -39,6 +41,7 @@ public class DispositivoService {
         dispositivo.setStatoDispositivo(body.getStatoDispositivo());
         dispositivo.setTipologiadispositivo(body.getTipologiadispositivo());
         dispositivoDao.save(dispositivo);
+
         return new RespondDispsitivoDto(dispositivo.getId());
     }
 
